@@ -1,0 +1,87 @@
+﻿@using System.Configuration
+@{
+    ViewBag.Title = "About";
+}
+@section featured{
+    <div id="body1">
+        <div class="about-container">
+            <h1>Who We Are</h1>
+            <div href="#" class="videos">
+                <a href="https://www.youtube.com/watch?time_continue=6&v=2kodXWejuy0" target="_blank">
+                    <img src="http://img.youtube.com/vi/2kodXWejuy0/0.jpg">
+                    <span class="play"></span>
+                </a>
+            </div>
+            <div class="text">
+                <h1>Fusce euismod consequat ante Lorem ipsum dolor sit amet consectetuer adipiscing elit Pellentesque sed dolor</h1>
+                <p>Pellentesque sed dolor. Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem. Vestibulum sed ante. Donec sagittis euismod purus. Mauris fermentum tortor non enim aliquet.</p>
+                <p>Nam aliquam pretium feugiat. Duis sem est, viverra eu interdum ac, suscipit nec mauris. Suspendisse commodo tempor sagittis! In justo est, sollicitudin eu scelerisque pretium, placerat eget elit. Praesent faucibus rutrum odio at rhoncus. Pellentesque vitae tortor id neque fermentum pretium. Maecenas ac lacus ut neque rhoncus laoreet sed id tellus. Donec justo tellus, tincidunt vitae pellentesque nec, pharetra a orci.</p>
+            </div>
+        </div>
+        <div class="row">
+            <h1>Testimonials</h1>
+            <div class="column">
+                <blockquote>
+                    <a href="#">Aenean nonummy hendrerit mau phasellu porta. Fusce suscipit varius mi sed. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio morbi. Ut viverra mauris justo, quis auctor nisi. Suspendisse sit amet diam diam, eget volutpat lacus.... </a>
+                </blockquote>
+                <div class="meta">
+                    <div class="user">tim barkley</div>
+                    <a href="http://demolink.org">http://demolink.org</a>
+                </div>
+            </div>
+            <div class="column">
+                <blockquote>
+                    <a href="#">Aenean nonummy hendrerit mau phasellu porta. Fusce suscipit varius mi sed. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio morbi. Ut viverra mauris justo, quis auctor nisi. Suspendisse sit amet diam diam, eget volutpat lacus.... </a>
+                </blockquote>
+                <div class="meta">
+                    <div class="user">tim barkley</div>
+                    <a href="http://demolink.org">http://demolink.org</a>
+                </div>
+            </div>
+            <div class="column">
+                <blockquote>
+                    <a href="#">Aenean nonummy hendrerit mau phasellu porta. Fusce suscipit varius mi sed. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio morbi. Ut viverra mauris justo, quis auctor nisi. Suspendisse sit amet diam diam, eget volutpat lacus.... </a>
+                </blockquote>
+                <div class="meta">
+                    <div class="user">tim barkley</div>
+                    <a href="http://demolink.org">http://demolink.org</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 32%;">
+            <h1>our staff</h1>
+            <ul>
+                <li>
+                    <img src="http://livedemo00.template-help.com/wordpress_52085/wp-content/uploads/2012/05/team_1.jpg" />
+                    <h3>adam barker</h3>
+                    <p>Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibu. Suspendisse... </p>
+                </li>
+                <li>
+                    <img src="http://livedemo00.template-help.com/wordpress_52085/wp-content/uploads/2012/05/team_1.jpg" />
+                    <h3>adam barker</h3>
+                    <p>Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibu. Suspendisse... </p>
+                </li>
+                <li>
+                    <img src="http://livedemo00.template-help.com/wordpress_52085/wp-content/uploads/2012/05/team_1.jpg" />
+                    <h3>adam barker</h3>
+                    <p>Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibu. Suspendisse... </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        $(window).load(function() {
+            $("#about").addClass("active");
+            $.ajax({
+                type: "GET",
+                url: "GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+        });
+    </script>
+}

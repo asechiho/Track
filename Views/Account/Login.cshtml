@@ -1,0 +1,50 @@
+@{
+    ViewBag.Title = "Login";
+}
+@model Cars.Models.UserVIewLogin
+
+@section featured{
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <div id="bodylogin">
+            <h1>Login</h1>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="date-panel">
+                <div class="panel">
+                    <div class="panlabel">
+                        @Html.LabelFor(model => model.nickName)
+                    </div>
+                    @Html.EditorFor(model => model.nickName)
+                    @Html.ValidationMessageFor(model => model.nickName)
+                </div>
+                <div class="panel">
+                    <div class="panlabel">
+                        @Html.LabelFor(model => model.password)
+                    </div>
+                    @Html.EditorFor(model => model.password)
+                    @Html.ValidationMessageFor(model => model.password)
+                </div>
+                <div class="panel">
+                    <div class="panlabel">
+                        @Html.LabelFor(model => model.remember)
+                    </div>
+                    @Html.EditorFor(model => model.remember)
+                </div>
+                <div class="panel">
+                    <div style="width: 50%; margin-left: 25%; height: 100%;">
+                        <button class="btn btn-default" type="submit">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+@section scripts{
+    <script>
+        $(window).load(function() {
+            $("#home").addClass("active");
+        });
+    </script>
+}
+

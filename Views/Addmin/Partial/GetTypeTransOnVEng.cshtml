@@ -1,0 +1,2 @@
+﻿@model Cars.Models.OrderView
+@Html.DropDownListFor(a => a.model, (IEnumerable<SelectListItem>)ViewData["type-trans"], htmlAttributes: new {@class = "select-admin", @onchange="typeTransClick();"})

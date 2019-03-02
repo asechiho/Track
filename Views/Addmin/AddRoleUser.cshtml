@@ -1,0 +1,69 @@
+@{
+    ViewBag.Title = "AddRoleUser";
+}
+@using Cars.Models
+@model List<RoleInUser>
+@section featured{
+
+    @using (Html.BeginForm())
+    {
+        <div id="AddRoleUser" ng-controller="selectrole">
+            <div class="content">
+                <table class="User-role">
+                    <thead>
+                    <tr>
+                        <td class="td20">NickName</td>
+                        <td class="thd30">FIO</td>
+                        <td class="td18">Roles name</td>
+                        <td class="td20">Add</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (RoleInUser user in Model)
+                    {
+                        <tr>
+                            <td class="td20">@user.nickName</td>
+                            <td class="thd30">@user.firstName @user.lastName</td>
+                            <td class="td18">@foreach (Role rol in user.roles)
+                                             {
+                                                 @rol.name.Replace(" ", "")<label>; </label>
+                                             } </td>
+                            <td class="td20">
+                                <buttonsnolink label="Add role" color="green" clas="buttons-default" ng-click="Open('@user.nickName')"></buttonsnolink>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade {{class}}">
+                <div class="content">
+                    <div class="modal-header">
+                        <h1>Add role</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h1>NickName: {{nickname}}</h1>
+                        <h1 style="width: 20%; float: left;">Role name:</h1>
+                        <select style="float: left;" class="select-admin" ng-model="val">
+                            <option ng-repeat="role in listRoles" value="{{role}}">{{role}}</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="conteiner-buy-order-but btn-left">
+                            <buttons clas="buttons-defaultb" label="Save change" color="green" ng-click="Save()"></buttons>
+                        </div>
+                        <div class="conteiner-buy-order-but btn-right">
+                            <buttonsnolink label="Close" color="red" clas="buttons-defaultb" ng-click="Close()"></buttonsnolink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+
+@section scripts{
+    <script src="../../Scripts/Controllers/AddRoleUser.js"></script>
+}

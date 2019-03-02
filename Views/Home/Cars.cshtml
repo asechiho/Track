@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Cars";
+}
+@using Cars.Models
+@model @ItemGroup
+@section featured{
+    <div id="bodycars">
+        <div class="categories" ng-controller="SearchController">
+            <div class="search_panels">
+                <div class="type_engine">
+                    <p>Maker: </p>
+                    <select class="type_fuel" ng-model="maker">
+                        <option value="" ng-click="MakerClick();">ALL</option>
+                        <option ng-repeat="maker in models.maker" value="{{maker.Value}}" ng-click="MakerClick();" ng-selected="{{maker.Selected}}">{{maker.Text}}</option>
+                    </select>
+                    <!--Html.DropDownListFor(a => a.maker,(IEnumerable<SelectListItem>)Model.maker, htmlAttributes: new { class = "type_fuel"})-->
+                </div>
+                <div class="type_engine">
+                    <p>Model: </p>
+                    <select class="type_fuel" ng-model="modela">
+                        <option value="">ALL</option>
+                        <option ng-repeat="model in models.model" value="{{model.Value}}" ng-selected="{{model.Selected}}">{{model.Text}}</option>
+                    </select>
+                    <!--Html.DropDownListFor(a => a.model,(IEnumerable<SelectListItem>)Model.model, htmlAttributes: new { class = "type_fuel"})-->
+                </div>
+            </div>
+            <div class="search_panels">
+                <div class="type_engine">
+                    <p>Fuel type: </p>
+                    <select class="type_fuel" ng-model="fuel">
+                        <option value="">ALL</option>
+                        <option ng-repeat="typeFuel in models.typeFuel" value="{{typeFuel.Value}}" ng-selected="{{typeFuel.Selected}}">{{typeFuel.Text}}</option>
+                    </select>
+                    <!--Html.DropDownListFor(a => a.typeFuel,(IEnumerable<SelectListItem>)Model.typeFuel, htmlAttributes: new { class = "type_fuel"})-->
+                </div>
+                <div class="type_engine">
+                    <p>Displacement of: </p>
+                    <input class="default" ng-model="v1"/>
+                    <!--Html.TextBoxFor(a => a.v1, htmlAttributes: new { class = "default" })-->
+                    <p>to </p>
+                    <input class="default" ng-model="v2"/>
+                    <!--Html.TextBoxFor(a => a.v2, htmlAttributes: new { class = "default" })-->
+                </div>
+            </div>
+            <div class="search_panels">
+                <div class="type_engine">
+                    <p>Price from: </p>
+                    <input class="default" ng-model="price1"/>
+                    <!--Html.TextBoxFor(a => a.price1, htmlAttributes: new { class = "default" })-->
+                    <p>to </p>
+                    <input class="default" ng-model="price2"/>
+                    <!--Html.TextBoxFor(a => a.price2, htmlAttributes: new { class = "default" })-->
+                </div>
+                <div class="type_engine">
+                    <p>Running from: </p>
+                    <input class="default" ng-model="run1"/>
+                    <!--Html.TextBoxFor(a => a.run1, htmlAttributes: new { class = "default" })-->
+                    <p>to </p>
+                    <input class="default" ng-model="run2"/>
+                    <!--Html.TextBoxFor(a => a.run2, htmlAttributes: new { class = "default" })-->
+                </div>
+            </div>
+            <div class="search_panels">
+                <div class="button-panel">
+                    <!--Html.ActionLink("Search","Cars")-->
+                    <a href="" ng-click="Search();">Search</a>
+                </div>
+                <div class="button-panel" style="margin-top: 2%;">
+                    <a href="" ng-click="Clear();">Clear</a>
+                </div>
+            </div>
+        </div>
+        <section class="cars_content" ng-controller="NavigationCars">
+            <div class="type_cars_nav">
+                <span>Type truck: <a ng-click="AllClick();">All</a> | <a ng-click="TypeTruckClick('Wagon');">Wagon</a> | <a>Automatic coupling</a> | <a>Transporter</a> | <a>Tanker</a></span>
+            </div>
+            <div class="catalog">
+                <ul>
+                    <li ng-repeat="product in products track by $index" ng-click="ItemClick($index);">
+                        <img src="{{product.image}}">
+                        <div class="maker_model">
+                            <a href="~/Home/Detail/{{product.id}}">
+                                <h3>{{product.maker}} {{product.model}} {{product.typeCabin}}</h3>
+                            </a>
+                            <p>{{product.yearCreation}} y.;{{product.price | currency}}; diesel: {{product.vEngine}} cm<sup>3</sup>; {{product.horsePower}} hp; torque {{product.maxKM}} Nm; {{product.chassis}}
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="ride">
+                    <ul class="pagination">
+                        <li class="{{previo}}" ng-click="PreviousClick();"><a>&laquo;</a></li>
+                        <li class="{{pages.activeName}}" ng-repeat="pages in pages track by $index" ng-click="NumberClick($index);"><a>{{pages.namber}}</a></li>
+                        <li class="{{next}}" ng-click="NextClick();"><a>&raquo;</a></li>
+                        {{pageCount}}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/CarsJS")
+    <script>
+        $(window).load(function() {
+            $("#cars").addClass("active");
+        });
+
+        /*(function () {
+            $("#maker").change(function () {
+                var mak = $("#maker").val();
+                $.ajax({
+                    type: "GET",
+                    url: 'Url.Action("_MakersInCars")',
+                    data: { maker: mak },
+                    success: function (data) {
+                        $("#model").replaceWith(data);
+                    }
+                });
+            });
+        });*/
+        $.ajax({
+            type: "GET",
+            url: "GetCountItemBasket",
+            success: function (data) {
+                var count = data;
+                $("#countBasket").text(count);
+            }
+        });
+
+    </script>
+}

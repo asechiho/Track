@@ -1,0 +1,66 @@
+@{
+    ViewBag.Title = "AdminPanel";
+}
+
+@section featured{
+    <div id="Admin">
+        <h1>Administrator panel</h1>
+
+        <div class="Admin-button">
+            <div class="items">
+                <h1>Add new:</h1>
+                <div class="conteiner-buy-order-but wdth-18 " style="float: left;">
+                    <buttons clas="buttons-defaultb" color="green" label="Product" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18 " style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="User" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18 " style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Role" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but " style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Role of the user" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18 " style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Order" link="#"></buttons>
+                </div>
+            </div>
+            <div class="items">
+                <h1>change and view existing:</h1>
+                <div class="conteiner-buy-order-but wdth-18" style="float: left;">
+                    <buttons clas="buttons-defaultb" color="green" label="Products" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18" style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Users" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18" style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Roles" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but" style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Role of the user" link="#"></buttons>
+                </div>
+                <div class="conteiner-buy-order-but wdth-18" style="float: left; margin-left: 2%;">
+                    <buttons clas="buttons-defaultb" color="green" label="Orders" link="#"></buttons>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(window).load(function() {
+            $("#home").addClass("active");
+
+            $.ajax({
+                type: "GET",
+                url: "../Home/GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+
+        });
+    </script>
+}

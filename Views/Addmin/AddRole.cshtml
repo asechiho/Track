@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "AddNewRole";
+}
+@using Cars.Models
+@model Role
+@section featured{
+    @using (Html.BeginForm("AddNewRole", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div id="AddRole">
+            <h1>Add new role</h1>
+            <div class="content-role">
+                @Html.LabelFor(a => a.name, htmlAttributes: new {@class = "label-for"})
+                @Html.TextBoxFor(a => a.name, htmlAttributes: new {@class = "default"})
+                @Html.ValidationMessageFor(a => a.name)
+                <div style="width: 200px; margin-left: 2%; margin-top: 0.5%; float: left;">
+                    <button class="btn btn-default" type="submit">Save</button>
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
+@section scripts{
+    
+}

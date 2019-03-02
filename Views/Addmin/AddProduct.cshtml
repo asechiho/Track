@@ -1,0 +1,163 @@
+@{
+    ViewBag.Title = "AddProduct";
+}
+@using Cars.Models
+@model ProductInfoView
+@section featured{
+    @using (Html.BeginForm("AddNewCar","Admin"))
+    {
+        <div id="AddProduct">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <h1>Add product</h1>
+            <div class="img-conteiner">
+                <img src=""/>
+                @Html.TextBoxFor(a => a.image, htmlAttributes: new {@type = "file", @accept="image/jpeg", @value="P:\\Cars\\Cars\\BD"})
+            </div>
+            <div class="main-info">
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.typeCars)
+                    </div>
+                    @Html.DropDownListFor(a => a.typeCars, Model.typeCars ,htmlAttributes: new {@class = "select-admin"})
+                    @Html.ValidationMessageFor(a=>a.typeCars)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.maker)
+                    </div>
+                    @Html.DropDownListFor(a => a.maker, (IEnumerable<SelectListItem>)Model.makers, htmlAttributes: new {@class = "select-admin"})
+                    @Html.ValidationMessageFor(a=>a.maker)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.model)
+                    </div>
+                    @Html.DropDownListFor(a => a.model, (IEnumerable<SelectListItem>)Model.models, htmlAttributes: new {@class = "select-admin"})
+                    @Html.ValidationMessageFor(a=>a.model)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.typeCabin)
+                    </div>
+                    @Html.TextBoxFor(a => a.typeCabin, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.typeCabin)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.color)
+                    </div>
+                    @Html.TextBoxFor(a => a.color, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.color)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.yearCreation)
+                    </div>
+                    @Html.TextBoxFor(a => a.yearCreation, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.yearCreation)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.price)
+                    </div>
+                    @Html.TextBoxFor(a => a.price, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.price)
+                </div>
+            </div>
+            <div class="support-info">
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.typeEngine)
+                    </div>
+                    @Html.TextBoxFor(a => a.typeEngine, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.typeEngine)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.vEngine)
+                    </div>
+                    @Html.TextBoxFor(a => a.vEngine, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.vEngine)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.horsePower)
+                    </div>
+                    @Html.TextBoxFor(a => a.horsePower, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.horsePower)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.power)
+                    </div>
+                    @Html.TextBoxFor(a => a.power, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.power)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.maxPowerKM)
+                    </div>
+                    @Html.TextBoxFor(a => a.maxPowerKM, htmlAttributes: new {@class = "default", @pattern="\\d\\d\\d\\d?-\\d\\d\\d\\d?", @placeholder="0000-0000(0:[0-9])"}) 
+                    <label style="margin-left: 1%;">torque</label>
+                    @Html.ValidationMessageFor(a=>a.maxPowerKM)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.maxKM)
+                    </div>
+                    @Html.TextBoxFor(a => a.maxKM, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.maxKM)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.maxKMRevolution)
+                    </div>
+                    @Html.TextBoxFor(a => a.maxKMRevolution, htmlAttributes: new {@class = "default", @placeholder="0000-0000(0:[0-9])", @pattern="\\d\\d\\d\\d?-\\d\\d\\d\\d?"})
+                    <label style="margin-left: 1%;">rpm</label>
+                    @Html.ValidationMessageFor(a=>a.maxKMRevolution)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.typeTransmission)
+                    </div>
+                    @Html.DropDownListFor(a => a.typeTransmission, (IEnumerable<SelectListItem>)Model.typeTransmissions , htmlAttributes: new {@class = "select-admin"})
+                    @Html.ValidationMessageFor(a=>a.typeTransmission)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.countTransmission)
+                    </div>
+                    @Html.TextBoxFor(a => a.countTransmission, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.countTransmission)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.typeFuel)
+                    </div>
+                    @Html.DropDownListFor(a => a.typeFuel, (IEnumerable<SelectListItem>)Model.typeFuels, htmlAttributes: new {@class = "select-admin"})
+                    @Html.ValidationMessageFor(a=>a.typeFuel)
+                </div>
+                <div class="panel-input">
+                    <div class="label-for">
+                        @Html.LabelFor(a => a.chassis)
+                    </div>
+                    @Html.TextBoxFor(a => a.chassis, htmlAttributes: new {@class = "default"})
+                    @Html.ValidationMessageFor(a=>a.chassis)
+                </div>
+            </div>
+            <div class="save-product">
+                <div style="width: 200px; margin-left: -15%; ">
+                    <button class="btn btn-default" type="submit">Save</button>
+                </div>
+                <div style="width: 200px; margin-left: 1%;">
+                    <button class="btn btn-default" type="reset">Cancel</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section scripts{
+    
+}

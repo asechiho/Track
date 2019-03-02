@@ -1,0 +1,2 @@
+﻿@model Cars.Models.OrderView
+@Html.DropDownListFor(a=>a.typeCabin, (IEnumerable<SelectListItem>) ViewData["cabin"], htmlAttributes: new {@class="select-admin", @onchange="cabinClick();"})

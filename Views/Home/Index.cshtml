@@ -1,0 +1,138 @@
+@{
+    ViewBag.Title = "Index";
+}
+@using Cars.Models
+@model List<@MainInfoCars>
+@section featured
+{
+    <div id="body">
+        <div class="left" ng-controller="IndexMakers">
+            <ul>
+                <li ng-repeat="maker in makers track by $index" ng-click="LiClick($index)"><a href="~/Home/Cars_Maker/{{maker}}">{{maker}}</a></li>
+                <!--li><a href="#">Iveco</a></!--li>
+                <li><a href="#">Mercedes-Benz</a></li>
+                <li><a href="#">Renault</a></li>
+                <li><a href="#">Volvo</a></li-->
+            </ul>
+            <div class="news">
+                <div class="post" style="background-image: url(../../Images/banner_img_1.jpg); background-color: #7b7a7f;">
+                    <div class="banner">
+                        <h4>Lorem ipsum dolor sit amet conse ctetur</h4>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui</p>
+                        <div class="linkbutton">
+                            <a href="#">read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post" style="background-image: url(../../Images/banner_img_2.jpg); background-color: #7b7a7f;">
+                    <div class="banner">
+                        <h4>Lorem ipsum dolor sit amet conse ctetur</h4>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui</p>
+                        <div class="linkbutton">
+                            <a href="#">read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="imagepanel">
+                <div id="@Model[0].id" class="main" style="background-image: url(@Model[0].image);">
+                    <div class="caption">
+                        <span class="post-date">@Model[0].day @Model[0].month</span>
+                        <div class="title"><a href="~/Home/Detail/@Model[0].id">@Model[0].maker @Model[0].model @Model[0].typeCabin @Model[0].chassis, @Model[0].yearCreation y., @Model[0].price$, @Model[0].typeEngine, @Model[0].vEngine cm<sup>3</sup></a>
+                        </div>
+                        <div class="meta">
+                            <div class="post-meta" style="background-image: url(../../Images/review.png);">102</div>
+                            <div class="post-meta" style="background-image: url(../../Images/comment.png); width: 21%;">102</div>
+                            <div class="post-meta" style="background-image: url(../../Images/like.png); width: 20%;">102</div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="not-main">
+                    @for (int i = 1; i < @Model.Count; i++)
+                    {
+                        <li id="@Model[i].id" style="background-image: url(@Model[i].image);">
+                            <div class="caption">
+                                <span class="post-date">@Model[i].day @Model[i].month</span>
+                                <div class="title">
+                                    <a href="~/Home/Detail/@Model[i].id">@Model[i].maker @Model[i].model @Model[i].typeCabin @Model[i].chassis, @Model[i].yearCreation y., @Model[i].price$, @Model[i].typeEngine, @Model[i].vEngine cm<sup>3</sup></a>
+                                </div>
+                                <div class="meta">
+                                    <div class="post-meta" style="background-image: url(../../Images/review.png);">102</div>
+                                    <div class="post-meta" style="background-image: url(../../Images/comment.png); width: 21%;">102</div>
+                                    <div class="post-meta" style="background-image: url(../../Images/like.png); width: 20%;">102</div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+            <div class="left">
+                <h1>Latest News</h1>
+                <ul>
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <li>
+                            <img class="post-news" src="../../Images/img_8-270x145.jpg">
+                            <div class="post-news-text">
+                                <p class="date">29 october</p>
+                                <p class="main-text">Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+                                <p class="text">Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem</p>
+                                <div class="meta">
+                                    <div class="post-meta" style="background-image: url(../../Images/review.png);">102</div>
+                                    <div class="post-meta" style="background-image: url(../../Images/comment.png); width: 23%;">102</div>
+                                    <div class="post-meta" style="background-image: url(../../Images/like.png); width: 23%;">102</div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    <li>
+                        <div class="butall-news">
+                            <a href="#" class="see">See all news</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="reviews" ng-controller="Reviews">
+                <h1>Latest reviews</h1>
+                <ul>
+                    <li ng-repeat="com in comments">
+                        <h1><a href="~/Home/Detail/{{com.id}}">{{com.namePost}}</a></h1>
+                        <h4>{{com.message}}</h4>
+                        <div class="meta">
+                            <div class="post-meta" style="background-image: url(../../Images/review.png);">102</div>
+                            <div class="post-meta" style="background-image: url(../../Images/comment.png);">102</div>
+                            <div class="post-meta" style="background-image: url(../../Images/like.png);">102</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="butall-reviews">
+                            <a href="#" class="see">See all reviews</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="../../Scripts/Controllers/Index.js"></script>
+    <script>
+        $(window).load(function() {
+            $("#home").addClass("active");
+
+            $.ajax({
+                type: "GET",
+                url: "GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+
+        });
+    </script>
+}

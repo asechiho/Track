@@ -1,0 +1,2 @@
+﻿@model Cars.Models.OrderView
+@Html.DropDownListFor(a => a.vEngine, (IEnumerable<SelectListItem>)ViewData["v-eng"], htmlAttributes: new {@class = "select-admin", @onchange="vEngClick();"})

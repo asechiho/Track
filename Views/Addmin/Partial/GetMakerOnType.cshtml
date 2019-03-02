@@ -1,0 +1,2 @@
+﻿@model Cars.Models.OrderView
+@Html.DropDownListFor(a => a.maker, (IEnumerable<SelectListItem>)ViewData["makers"], htmlAttributes: new {@class = "select-admin", @onchange="makerClick();"})

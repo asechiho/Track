@@ -1,0 +1,86 @@
+@{
+    ViewBag.Title = "Cars_Maker";
+}
+@using System.Runtime.Serialization
+@using Cars.Models
+@model List<ProductInfo>
+@section featured{
+    <div id="bodyMaker">
+        <div class="main-content">
+            <ul class="maker_car">
+                @foreach (ProductInfo one in Model)
+                {
+                    <li>
+                        <img src="../@one.image"/>
+                        <div class="content90" style="float: left; width: 40%;">
+                            <h3 class="main-info">
+                                <a href="~/Home/Detail/@one.id">@one.maker @one.model @one.typeCabin, @one.yearCreation y.</a>
+                            </h3>
+                            <p class="support">@one.typeEngine, @one.horsePower hp., @one.horsePower hp(@one.power Vt) at (@one.maxPowerKM r/pm)</p>
+                            <p class="support">@one.maxKM Nm at (@one.maxKMRevolution r/pm)</p>
+                        </div>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="money content90" style="float: right;">
+                                <h3 class="main-info">@one.price
+                                    <label class="color-green">$</label>
+                                </h3>
+                                <h3 class="main-info">
+                                    @Math.Round(Convert.ToInt64(one.price) * 2.06, 2, MidpointRounding.ToEven)
+                                    <label class="color-green">blr.</label>
+                                </h3>
+                                <h3 class="main-info">
+                                    @Math.Round(Convert.ToInt64(one.price) * 2.06 / 0.3, 2, MidpointRounding.ToEven)
+                                    <label class="color-green">ru.</label>
+                                </h3>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="money content90">
+                                <h3 class="main-info">@one.price
+                                    <label class="color-green">$</label>
+                                </h3>
+                                <h3 class="main-info">
+                                    @Math.Round(Convert.ToInt64(one.price)*2.06, 2, MidpointRounding.ToEven)
+                                    <label class="color-green">blr.</label>
+                                </h3>
+                                <h3 class="main-info">
+                                    @Math.Round(Convert.ToInt64(one.price)*2.06/0.3, 2, MidpointRounding.ToEven)
+                                    <label class="color-green">ru.</label>
+                                </h3>
+                            </div>
+                            <div class="content-buy-order content90">
+                                <div class="conteiner-buy-order-but">
+                                    <buttons clas="buttons-defaultb" color="green" label="Buy" link="~/Home/BuyCar/@one.id?rtl=@one.maker"></buttons>
+                                </div>
+                                <div class="conteiner-buy-order-but">
+                                    <buttons clas="buttons-defaultb" color="green" label="Add basket" link="~/Home/AddBasket/@one.id?rtl=@one.maker"></buttons>
+                                </div>
+                            </div>
+                        }
+                        
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(window).load(function() {
+            $("#home").addClass("active");
+
+            $.ajax({
+                type: "GET",
+                url: "../GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+
+        });
+    </script>
+}

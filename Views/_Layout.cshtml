@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-cloak>
+<head>
+    <link type="text/css" rel="stylesheet" href="../../Content/style.css">
+    <title>Shop Truck</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<!--RegisterLink-->
+<div class="reg-head">
+    <div class="register">
+        <button class="fbutton2">ok</button>
+        <input class="search-text" onblur="if (this.value == '') this.value = 'Search';" onfocus="if (this.value == 'Search') this.value = '';" type="text"/>
+        <div style="float: right; margin: 4px 7px 0 0">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <label>(<label id="countBasket" style="color: #Dc1535;">0</label>)</label>
+                <div class="drop-down">
+                    <a href="~/Account/User/@User.Identity.Name">@User.Identity.Name</a>
+                    <div class="dropdown-menu">
+                        @if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Panel admin", "AdminPanel", "Admin")
+                        }
+                        <a href="~/Account/User/@User.Identity.Name">Profil</a>
+                        @Html.ActionLink("Basket", "Basket", "Home")
+                        @Html.ActionLink("Log Out", "LogOff", "Account")
+                    </div>
+                </div>
+
+                <label style="font-size: 1em;">/</label>
+                @Html.ActionLink("Log Out", "LogOff", "Account")
+            }
+            else
+            {
+                @Html.ActionLink("Login", "Login", "Account")
+                <label style="font-size: 1em;">/</label>
+                @Html.ActionLink("Register", "Register", "Account")
+            }
+        </div>
+    </div>
+</div>
+
+<!--top-navigation-->
+<div class="top-header">
+    <div class="logotype">
+        <h1>Cars</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a id="home" href="~/Home/Index">home</a></li>
+            <li><a id="about" href="~/Home/About">about</a></li>
+            <li><a id="cars" href="~/Home/Cars">cars</a></li>
+            <li><a id="news" href="#">news</a></li>
+            <li><a id="contacts" href="#">contacts</a></li>
+        </ul>
+    </nav>
+</div>
+<!--body-->
+
+@RenderSection("featured", required: false)
+@RenderBody()
+
+<!--footer-->
+<footer>
+    <div class="container">
+        <div class="text">
+            <h1>Product</h1>
+            <ul class="unstyled">
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Седельный_тягач" target="_blank">Wagon</a>
+                </li>
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Автосцепка"
+                       target="_blank">Automatic coupling</a>
+                </li>
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Автовоз"
+                       target="_blank">Transporter</a>
+                </li>
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Автоцистерна"
+                       target="_blank">Tanker</a>
+                </li>
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Микроавтобус"
+                       target="_blank">Minibus</a>
+                </li>
+                <li>
+                    <a href="https://ru.wikipedia.org/wiki/Микроавтобус"
+                       target="_blank">Grain</a>
+                </li>
+            </ul>
+        </div>
+        <div class="text">
+            <h1>Company</h1>
+            <ul class="unstyled">
+                <li><a href="#">About As</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Reviews</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="text">
+            <h1>Learn more</h1>
+            <ul class="unstyled">
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Developers</a></li>
+                <li><a href="#">Referral program</a></li>
+                <li><a href="#">Affilare program</a></li>
+                <li><a href="#">Resseler program</a></li>
+                <li><a href="#">Folder sharing FAQ</a></li>
+            </ul>
+        </div>
+        <div class="text">
+            <h1>connect with us</h1>
+            <ul class="unsocial">
+                <li style="list-style-image: url(../../Images/f_list.png);"><a href="#">Facebook</a></li>
+                <li style="list-style-image: url(../../Images/t_list.png);"><a href="#">Twitter</a></li>
+                <li style="list-style-image: url(../../Images/v_list.png);"><a href="#">Vkontakte</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2016 Sechiho Aleksey Evgenievich. All Rights Reserved.</p>
+    </div>
+</footer>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/angularjs")
+@Scripts.Render("~/bundles/Directive")
+@RenderSection("scripts", required: false)
+</body>
+</html>
+

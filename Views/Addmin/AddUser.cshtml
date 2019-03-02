@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "AddUser";
+}
+@model Cars.Models.User
+@section featured{
+
+    <div id="bodyregister">
+        <h1>Add new user</h1>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="main-content">
+                @Html.ValidationSummary(true)
+                <div class="user-date">
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.nickName)
+                        </div>
+                        @Html.EditorFor(model => model.nickName)
+                        @Html.ValidationMessageFor(model => model.nickName)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.password)
+                        </div>
+                        @Html.EditorFor(model => model.password)
+                        @Html.ValidationMessageFor(model => model.password)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.firstName)
+                        </div>
+                        @Html.EditorFor(model => model.firstName)
+                        @Html.ValidationMessageFor(model => model.firstName)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.lastName)
+                        </div>
+                        @Html.EditorFor(model => model.lastName)
+                        @Html.ValidationMessageFor(model => model.lastName)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.email)
+                        </div>
+                        @Html.EditorFor(model => model.email)
+                        @Html.ValidationMessageFor(model => model.email)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.address)
+                        </div>
+                        @Html.EditorFor(model => model.address)
+                        @Html.ValidationMessageFor(model => model.address)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.phone)
+                        </div>
+                        @Html.EditorFor(model => model.phone)
+                        @Html.ValidationMessageFor(model => model.phone)
+                    </div>
+                    <div class="panel">
+                        <div style="height: 100%; width: 23%; float: left;">
+                            @Html.LabelFor(model => model.remember)
+                        </div>
+                        @Html.EditorFor(model => model.remember)
+                    </div>
+                </div>
+                <img class="img-logo" />
+                @Html.TextBoxFor(model=>model.image, htmlAttributes: new {@style="opacity: 0;", @type="file"})
+                <div style="width: 100%;">
+                    <hr />
+                    <div style="width: 200px; margin-left: 20%;">
+                        <button class="btn btn-default" type="submit">Save</button>
+                    </div>
+                    <div style="width: 200px; margin-left: 1%;">
+                        <button class="btn btn-default" type="" >Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div style="height: 20px; width: 100%;"></div>
+
+}
+@section scripts{
+   
+}
+

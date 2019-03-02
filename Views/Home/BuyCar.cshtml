@@ -1,0 +1,39 @@
+@{
+    ViewBag.Title = "BuyCar";
+}
+@section featured{
+    <div id="bodyBuy" ng-controller="Buy">
+        <div class="content">
+            <div style="width: 100%;">
+                <div class="user-info">
+                    <p style="margin-bottom: 0px;">First Name: {{user.firstName}}</p>
+                    <p style="margin-top: 0px;">Last Name: {{user.lastName}}</p>
+                    <p>E-mail: {{user.email}}</p>
+
+
+                    <p >Phone: +375 ({{user.phoneCode}}) {{user.phoneNumb}} <label>(<a id="edit" ng-click="PhoneShow ='show'">edit</a>)</label></p>
+                    <form ng-class="PhoneShow" ng-submit="Phone(user.phone); PhoneShow = ''">
+                        <input class="default200 hide" ng-class="PhoneShow" ng-model="user.phone"></input>
+                    </form>
+
+                    <p>Address: {{user.address}} <label>(<a id="edit" ng-click="AddressShow ='show'">edit</a>)</label></p>
+                    <form ng-class="AddressShow" ng-submit="Address(user.address); AddressShow = ''">
+                        <input class="default200 hide" ng-class="AddressShow" ng-model="user.address"></input>
+                    </form>
+
+                </div>
+                <div style="width: 34%; height: 80%; float: left;">
+                    <div style="width: 100%; height: 50px; margin-left: 5px;" onclick="">
+                        <buttons label="Checkout" color="green" link="" ng-click="Buy(@ViewBag.Id, @ViewBag.Rtl)" clas="buttons-defaultb"></buttons>
+                    </div>
+                    <div style="width: 100%; height: 50px; margin-left: 5px;" onclick="">
+                        <buttons label="Go out" color="red" link="" ng-click="Exit(@ViewBag.Id, @ViewBag.Rtl)" class="buttons-defaultb"></buttons>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/BuyJs")
+}

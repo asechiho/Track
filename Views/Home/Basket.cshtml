@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Basket";
+}
+@using Cars.Models
+@model List<@BasketProduct>
+@{
+    int total = 0;
+    foreach (BasketProduct pr in Model)
+    {
+        total += pr.price;
+    }
+    
+}
+@section featured{
+    <div id="bodybasket">
+        <h1>Basket</h1>
+        <div class="container-table">
+            <table class="table basket">
+                <thead>
+                    <tr>
+                        <td>Product</td>
+                        <td></td>
+                        <td>Price</td>
+                        <td>Act</td>
+                    </tr>
+                </thead>
+                <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr id="@Model[i].id">
+                        <td>
+                            <img src="../BD/@Model[i].image" /></td>
+                        <td>
+                            <p>@Model[i].mainInfo</p>
+                            <p>@Model[i].moreInfo</p>
+                        </td>
+                        <td>@Model[i].price $</td>
+                        <td>
+                            <div style="width: 200px; height: 50px; margin-left: 10px;" onclick="">
+                                <buttons label="Delete product" color="red" link="~/Home/DeleteBasket/@Model[i].id"></buttons>
+                            </div>
+                            <div style="width: 200px; height: 50px; margin-left: 10px;">
+                                <buttons label="Buy product" color="green" link="~/Home/Basket"></buttons>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Number of goods: @Model.Count</td>
+                        <td></td>
+                        <td>Total: @total $</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-buttons">
+                <div class="buttons">
+                    <div class="wdth-50">
+                        <buttons label="Delete all" color="red" link="~/Home/DeleteAllBasket"></buttons>
+                    </div>
+                    <div class="wdth-50">
+                        <buttons label="Buy all" color="green" link=""></buttons>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section scripts{
+    <script>
+        $(window).load(function () {
+            $("#cars").addClass("active");
+
+            $.ajax({
+                type: "GET",
+                url: "GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,177 @@
+@{
+    ViewBag.Title = "Detail";
+}
+@using Cars.Models
+@model @ProductInfo
+@section featured
+{
+    <div id="bodydetail" ng-controller="Commentaries">
+        <div class="main_infocars">
+            <h3>@Model.maker @Model.model @Model.typeCabin, @Model.price$</h3>
+        </div>
+        <div class="detail">
+            <img src="../@Model.image" class="image">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Technical character</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Type of car</td>
+                    <td>@Model.typeCars</td>
+                </tr>
+                <tr>
+                    <td>Type of cabin</td>
+                    <td>@Model.typeCabin</td>
+                </tr>
+                <tr>
+                    <td>Chassis</td>
+                    <td>@Model.chassis</td>
+                </tr>
+                <tr>
+                    <td>Engine</td>
+                    <td>@Model.typeEngine</td>
+                </tr>
+                <tr>
+                    <td>Type engine</td>
+                    <td>Diesel</td>
+                </tr>
+                <tr>
+                    <td>Dimension engine</td>
+                    <td>@Model.vEngine cm<sup>3</sup></td>
+                </tr>
+                <tr>
+                    <td>Number of cylinders</td>
+                    <td>V6</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>@Model.horsePower hp(@Model.power Vt) at (@Model.maxPowerKM r/pm)</td>
+                </tr>
+                <tr>
+                    <td>Torque</td>
+                    <td>@Model.maxKM Nm at (@Model.maxKMRevolution r/pm)</td>
+                </tr>
+                <tr>
+                    <td>Gear box</td>
+                    <td>Automatic</td>
+                </tr>
+                <tr>
+                    <td>Number of gears</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>Drive</td>
+                    <td>full</td>
+                </tr>
+                <tr>
+                    <td>Environmental standard</td>
+                    <td>Euro 6</td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <div class="meta">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div style="width: 20%; float: right; margin-left: 10px;">
+                        <buttons label="Buy" color="green" clas="buttons-default" link="~/Home/BuyCar/@Model.id?rtl=0"></buttons>
+                    </div>
+                    <div style="width: 20%; float: right; margin-left: 10px;">
+                        <buttons label="Add basket" clas="buttons-default" color="green" link="~/Home/AddBasket/@Model.id?rtl=0"></buttons>
+                    </div>
+                    <div style="width: 20%; float: right;">
+                        <buttonsnolink label="Add comm" color="green" clas="buttons-default" ng-click="OpenDialog()"></buttonsnolink>
+                    </div>
+                }
+                else
+                {
+                    <div style="width: 20%; float: right; margin-left: 10px;">
+                    </div>
+                    <div style="width: 20%; float: right;">
+                    </div>
+                }
+                <div style="width: 36%; float: left; height: 100%;">
+                    <div style="margin-top: 15px;">
+                        <i class="icon-bookmark"></i>
+                        <a>Volvo</a>
+                    </div>
+                    <div class="marg">
+                        <i class="icon-date"></i>
+                        <a>October 30,2016</a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="comments">
+                <h1>{{lengthCom}}</h1>
+                <ul>
+                    <li ng-repeat="com in commentaries">
+                        <div style="height: 100px; width: 100%;">
+                            <img class="avatar" src="http://1.gravatar.com/avatar/b263802e2004e058851acabb4111135e?s=80&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D80&r=G">
+                            <div class="text">
+                                {{com.message}}
+                            </div>
+                        </div>
+                        <div class="nick" style="text-align: center;">
+                            {{com.user}}
+                        </div>
+                        <div class="meta">
+                            {{com.date}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="categoriesm">
+            <h1>Categories</h1>
+            <ul>
+                <li><a href="#">acura</a></li>
+                <li><a href="#">audi</a></li>
+                <li><a href="#">bmw</a></li>
+                <li><a href="#">cadilac</a></li>
+                <li><a href="#">shevrolet</a></li>
+            </ul>
+        </div>
+        <!--Modal dialog-->
+        <div class="modal fade {{class}}">
+            <div class="content">
+                <div class="modal-header">
+                    <h1>Add comments</h1>
+                </div>
+                <div class="modal-body">
+                    <h1>Login: @User.Identity.Name</h1>
+                    <textarea ng-model="message" class="area" placeholder="Message..." maxlength=510></textarea>
+                </div>
+                <div class="modal-footer">
+                    <div class="conteiner-buy-order-but btn-left">
+                        <buttons clas="buttons-defaultb" label="Save change" color="green" ng-click="SaveChange(@Model.id)"></buttons>
+                    </div>
+                    <div class="conteiner-buy-order-but btn-right">
+                        <buttonsnolink label="Close" color="red" clas="buttons-defaultb" ng-click="CloseDialog()"></buttonsnolink>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="../../Scripts/Controllers/Detail.js"></script>
+    <script>
+        $(window).load(function() {
+            $("#cars").addClass("active");
+            
+
+            $.ajax({
+                type: "GET",
+                url: "GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+        });
+    </script>
+}

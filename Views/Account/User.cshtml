@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "User";
+}
+@model Cars.Models.UserViewEdit
+@section featured{
+    <label style="opacity: 0;">{{posts = @Model.posts}}</label>
+    <div id="bodyuser" ng-controller="userCtrl">
+        <h1 id="user">@Model.nickName</h1>
+        <div ng-show="posts == 1" style="width: 100%;">
+            <img class="avatar-image" src="../../Images/img_6-485x260.jpg"/>
+            <div class="user-info">
+                <p>Nick Name: @Model.nickName (<a ng-click="Edit()">Edit</a>)
+                </p>
+                <p style="margin-bottom: 0px;">First Name: @Model.firstName</p>
+                <p style="margin-top: 0px;">Last Name: @Model.lastName</p>
+                <p>E-mail: @Model.email</p>
+                <p>Phone: +375 (@Model.phone.Substring(0, 2)) @Model.phone.Substring(2, Model.phone.Length - 2)</p>
+                <p>Address: @Model.address</p>
+            </div>
+        </div>
+        <div ng-show="posts == 2" style="width: 100%;">
+            <img class="avatar-image" src="../../Images/img_6-485x260.jpg"/>
+            <div class="user-info">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor(model => model.nickName)
+                    <div>
+                        <div class="float-left-20">
+                            <label class="mrg5-right" style="margin-bottom: 0px;">First Name<required></required>: </label>
+                        </div>
+                        @Html.EditorFor(model => model.firstName)
+                        <label class="col-silv mrg-left-5">@Model.firstName</label>
+                        @Html.ValidationMessageFor(model => model.firstName, "FirstName field is Required")
+                    </div>
+                    <div>
+                        <div class="float-left-20">
+                            <label class="mrg5-right" style="margin-top: 0px;">Last Name<required></required>: </label>
+                        </div>
+                        @Html.EditorFor(model => model.lastName)
+                        <label class="col-silv mrg-left-5">@Model.lastName</label>
+                        @Html.ValidationMessageFor(model => model.lastName, "LastName field is Required")
+                    </div>
+                    <div>
+                        <div class="float-left-20">
+                            <label class="mrg5-right">E-mail<required></required>: </label>
+                        </div>
+                        @Html.EditorFor(model => model.email)
+                        <label class="col-silv mrg-left-5">@Model.email</label>
+                        @Html.ValidationMessageFor(model => model.email, "Email field is Required")
+                    </div>
+                    <div>
+                        <div class="float-left-20">
+                            <label class="mrg5-right">Phone<required></required>: +375</label>
+                        </div>
+                        @Html.EditorFor(model => model.phone)
+                        <label class="col-silv mrg-left-5">@Model.phone</label>
+                        @Html.ValidationMessageFor(model => model.phone, "Phone field is Required")
+                    </div>
+                    <div>
+                        <div class="float-left-20">
+                            <label class="mrg5-right">Address: </label>
+                        </div>
+                        @Html.EditorFor(model => model.address)
+                        <label class="col-silv mrg-left-5">@Model.address</label>
+                    </div>
+                    <div class="btn-wid-20">
+                        <button class="btn btn-default" type="submit">Save</button>
+                    </div>
+                    <div class="btn-wid-20">
+                        <button class="btn btn-default" ng-click="NonEdit();" type="reset">Cancel</button>
+                    </div>
+                    <div class="btn-wid-30">
+                        <button class="btn btn-default" ng-click="ChangePass();" type="reset" id="change">Сhange password</button>
+                    </div>
+                }
+                <form name="Valid">
+                    <section ng-show="pass" class="change-pass">
+                        <h3>Change Password</h3>
+                        <div>
+                            <div class="float-left-30">
+                                <label class="mrg5-right">Old password: </label>
+                            </div>
+                            <input type="password" ng-model="oldPass" required class="default mrg-0" ng-minlength="8"/>
+                        </div>
+                        <div>
+                            <div class="float-left-30">
+                                <label class="mrg5-right">New password: </label>
+                            </div>
+                            <input type="password" ng-model="newPass" required class="default mrg-0" ng-minlength="8"/>
+                        </div>
+                        <div>
+                            <div class="float-left-30">
+                                <label class="mrg5-right">Confirm new password: </label>
+                            </div>
+                            <input type="password" ng-model="conPass" required class="default mrg-0" ng-minlength="8"/>
+                        </div>
+                        <p ng-show = "errConfirm" style="color: #DC1535; margin: 0;" class="hide-err">
+                            Incorrect New or Confirm password
+                        </p>
+                        <p style="color: #DC1535; margin: 0;" ng-show="Valid.$error.minlength">Short Passwords</p>
+                        <p style="color: #DC1535; margin: 0;" ng-show="errPas">{{errPasMes}}</p>
+                        <section class="btn-wid-20">
+                            <button class="btn btn-default" ng-click="SavePass(Valid);" type="button">Save</button>
+                        </section>
+                        <section class="btn-wid-20">
+                            <button class="btn btn-default" ng-click="NonChangePass();" type="reset">Cancel</button>
+                        </section>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+}
+@section scripts{
+    @Scripts.Render("~/bundles/UsersJS")
+    <script type="text/ng-template" id="Required.html">
+        <label style="font-size: 1.6em; text-align: center; vertical-align: middle;" title="Required field">*</label>
+    </script>
+    <script>/*this script output info of count product in basket*/
+        $(window).load(function() {
+            $("#home").addClass("active");
+            $.ajax({
+                type: "GET",
+                url: "../../../Home/GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+        });
+    </script>
+}
